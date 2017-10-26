@@ -31,9 +31,10 @@ class HelloController extends AppController
      * @params ResponseInterface $response
      * @return ResponseInterface
      */
-    public function runtime_error(ServerRequestInterface $request, ResponseInterface $response)
+    public function echo(ServerRequestInterface $request, ResponseInterface $response)
     {
-        return $response->withStatus(500);
+        $response->getBody()->write("<h1>" . $request->getQueryParams()['message'] ?? '' . "</h1>");
+        return $response->withStatus(200);
     }
 
     /**
@@ -41,9 +42,9 @@ class HelloController extends AppController
      * @params ResponseInterface $response
      * @return ResponseInterface
      */
-    public function echo(ServerRequestInterface $request, ResponseInterface $response)
+    public function twig(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $response->getBody()->write("<h1>" . $request->getQueryParams()['message'] ?? '' . "</h1>");
-        return $response->withStatus(200);
+        $view = new \Slim\Views\Twig(APP_DIR . 'views', ['cache' => APP_DIR . 'tmp/views']);
+        return $view->render($response, 'hello.twig', ['name' => 'twig-view']);
     }
 }

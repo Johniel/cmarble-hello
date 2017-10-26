@@ -1,0 +1,5 @@
+{
+    "require": {
+        "slim/twig-view": "^2.3"
+    }
+}
