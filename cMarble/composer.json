@@ -1,0 +1,7 @@
+{
+    "license": "MIT",
+    "require": {
+        "psr/http-message": "^1.0",
+        "phpunit/phpunit": "^6.4"
+    }
+}
